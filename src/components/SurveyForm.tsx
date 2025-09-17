@@ -49,8 +49,10 @@ const SurveyForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Email validation
-    if (!formData.email.trim() || !formData.email.includes('@')) {
+    // Email validation using native HTML5 rules
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const isValidEmail = !!emailInput && emailInput.checkValidity();
+    if (!formData.email.trim() || !isValidEmail) {
       setEmailError(true);
       return;
     }
@@ -87,7 +89,7 @@ const SurveyForm = () => {
 
   if (showSuccess) {
     return (
-      <div className="container mx-auto max-w-2xl py-16 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-4xl py-16 px-4 sm:px-6 lg:px-8">
         <div className="text-center mt-10">
           <div className="inline-block bg-green-100 p-4 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -102,7 +104,7 @@ const SurveyForm = () => {
   }
 
   return (
-    <div className="container mx-auto max-w-2xl py-16 px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto max-w-4xl py-16 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <header className="text-center mb-12">
         <h1 className="text-4xl font-bold text-zinc-900 tracking-tight mb-3">
