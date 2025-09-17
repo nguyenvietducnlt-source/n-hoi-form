@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,8 +10,16 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 42 7% 97%; /* zinc-50 */
+    --foreground: 39 3% 11%; /* zinc-800 */
+    
+    /* Form specific colors */
+    --form-background: 0 0% 100%; /* white */
+    --form-input-bg: 240 5% 96%; /* zinc-100/80 equivalent */
+    --form-border: 240 6% 90%; /* zinc-200 */
+    --form-text: 0 0% 39%; /* zinc-700 */
+    --form-accent: 217 91% 60%; /* blue-500 */
+    --form-accent-dark: 221 83% 53%; /* blue-600 */
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -101,5 +111,42 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom form styles inspired by the original design */
+@layer components {
+  .form-input:focus, .form-textarea:focus {
+    outline: none !important;
+    border-color: hsl(var(--form-accent)) !important;
+    box-shadow: 0 0 0 3px hsl(var(--form-accent) / 0.2) !important;
+  }
+  
+  .custom-radio-label input:checked ~ .custom-radio-span {
+    border-color: hsl(var(--form-accent-dark));
+  }
+  
+  .custom-radio-label input:checked ~ .custom-radio-span::after {
+    transform: scale(1);
+    background-color: hsl(var(--form-accent-dark));
+  }
+  
+  .custom-radio-span {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .custom-radio-span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0.2s ease-in-out;
   }
 }
